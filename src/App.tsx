@@ -23,7 +23,7 @@ function App() {
     const  f4 = form.get("f4")as string
     const  g = form.get("g")
     const  h = form.get("h")
-    const response = await fetch("http://localhost:3000/api/v1/encuesta",{
+    const response = await fetch("https://backend-proyecto-n83q.onrender.com/api/v1/encuesta",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
