@@ -8,34 +8,43 @@ function App() {
     const form = new FormData(event.target)
     const  a = form.get("a")
     const  b = form.get("b")
-    const  c1 = form.get("c1")
-    const  c2 = form.get("c2")
-    const  c3 = form.get("c3")
-    const  c4 = form.get("c4")
-    const  c5 = form.get("c5")
-    const  c6 = form.get("c6")
+    const  c1 = form.get("c1") as string
+    const  c2 = form.get("c2")as string
+    const  c3 = form.get("c3")as string
+    const  c4 = form.get("c4")as string
+    const  c5 = form.get("c5")as string
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const  c6 = form.get("c6")as String
     const  d = form.get("d")
     const  e = form.get("e")
-    const  f1 = form.get("f1")
-    const  f2 = form.get("f2")
-    const  f3 = form.get("f3")
-    const  f4 = form.get("f4")
+    const  f1 = form.get("f1")as string
+    const  f2 = form.get("f2")as string
+    const  f3 = form.get("f3")as string
+    const  f4 = form.get("f4")as string
     const  g = form.get("g")
     const  h = form.get("h")
-    const response = await fetch("https://backend-proyecto-n83q.onrender.com/encuesta",{
+    const response = await fetch("http://localhost:3000/api/v1/encuesta",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        a,b,c: (c1?c1+", ":"")+(c2?c2+", ":"")+(c3?c3+", ":"")+(c4?c4+", ":"")+(c5?c5+", ":"")+(c6?c6:""),d, e, f: (f1?f1+", ":"")+(f2?f2+", ":"")+(f3?f3+", ":"")+(f4?f4:""), g, h
+        frecuencia_compra:Number(a),
+        gasto_promedio:Number(b),
+        panes_favoritos: (c1?c1.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(c2?c2.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(c3?c3.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(c4?c4.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(c5?c5.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(c6?c6.replace(" ", "-").replace(" ", "-").replace(" ", "-"):""),
+        preferencia_compra_pan:d,
+        opinion_panaderias_area: e,
+        razones_pref_panaderias_locales: (f1?f1.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(f2?f2.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(f3?f3.replace(" ", "-").replace(" ", "-").replace(" ", "-")+" ":"")+(f4?f4.replace(" ", "-").replace(" ", "-").replace(" ", "-"):""), 
+        comentarios_habitos_compra_pan: g,
+        acepta_ofertas_actualizaciones: h
       })
 
       
     })
-    if (response.ok){
-      alert("Encuesta enviada")
+    if (!response.ok){
+      alert("Ha ocurrido un problema...\nVuelve a enviar la encuesta.")
     }
+    alert("Encuesta Enviada.")
 
     
   }
@@ -88,7 +97,7 @@ function App() {
 
         <label className="font-medium text-gray-900 dark:text-gray-300 mt-7 text-xl mb-5">¿Prefieres comprar pan fresco en una panadería local o en una tienda de comestibles?</label>
         <div className="flex items-center mb-4">
-          <input id="country-option-1" type="radio" name="d" value="Panadería local" className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+          <input id="country-option-1" type="radio" name="d" value="Panaderia local" className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" />
           <label htmlFor="country-option-1" className="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300">
           Panadería local
           </label>
